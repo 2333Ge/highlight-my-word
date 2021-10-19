@@ -1,12 +1,11 @@
 'use strict';
 import * as vscode from 'vscode';
 import { highlightColorManager } from './ThemeManager';
-import { ThemeHighlightManager } from './ThemeHighlightManager';
+import { themeHighlightManager } from './ThemeHighlightManager';
 
 
 export function activate(context: vscode.ExtensionContext) {
 
-	const themeHighlightManager = new ThemeHighlightManager();
 	context.subscriptions.push(
 		vscode.window.onDidChangeVisibleTextEditors(editors => themeHighlightManager.onOpenEditor(editors)),
 		vscode.workspace.onDidChangeConfiguration(() => {
@@ -18,4 +17,6 @@ export function activate(context: vscode.ExtensionContext) {
 	themeHighlightManager.onOpenEditor();
 }
 
-export function deactivate() { }
+export function deactivate() {
+	themeHighlightManager.dispose();
+}
