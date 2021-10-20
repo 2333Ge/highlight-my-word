@@ -1,11 +1,11 @@
 {
   "name": "highlight-my-word",
   "publisher": "yangchaohao",
-  "displayName": "highlight my word",
-  "description": "highlight word",
+  "displayName": "%extension-title%",
+  "description": "%extension-title%",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.61.0"
+    "vscode": "^1.50.0"
   },
   "categories": [
     "Other"
@@ -17,7 +17,7 @@
   "contributes": {
     "configuration": [
       {
-        "title": "highlightMyWord",
+        "title": "%extension-title%",
         "properties": {
           "highlight-my-word.themes": {
             "type": "object",

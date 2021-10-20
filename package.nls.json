@@ -1,4 +1,5 @@
 {
+  "extension-title": "highlight my word",
   "configuration-curThemeKey": "当前使用的主题Key",
   "configuration-themes": "自定义主题",
   "configuration-basicTheme": "基础主题"
