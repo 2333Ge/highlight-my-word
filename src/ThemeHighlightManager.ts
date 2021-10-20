@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { ThemeHighlighter } from './ThemeHighlighter';
+import { highlightColorManager } from './ThemeManager';
 
 /**
  * 管理所有高亮情况
@@ -23,13 +24,22 @@ class ThemeHighlightManager {
 
   }
 
-  get previousEditors(): vscode.TextEditor[] {
-    return this._hightLightList.map(({ editor }) => editor);
+  public onConfigChange() {
+    highlightColorManager.reloadConfig();
+    this.onOpenEditor();
   }
 
   public dispose() {
+    highlightColorManager.dispose();
     this.disposeHighlightList(this._hightLightList);
+
   }
+
+  private get previousEditors(): vscode.TextEditor[] {
+    return this._hightLightList.map(({ editor }) => editor);
+  }
+
+
 
   private disposeHighlightList(list: ThemeHighlighter[] = []) {
     list.map(item => {
