@@ -1,4 +1,3 @@
-'use strict';
 import * as vscode from 'vscode';
 import { highlightColorManager } from './ThemeManager';
 import { themeHighlightManager } from './ThemeHighlightManager';

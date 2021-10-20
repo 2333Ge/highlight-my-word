@@ -2,7 +2,7 @@
 export type MatchResult = {
   index: number;
   target: string;
-};
+} | null;
 /**
  * 从指定位置开始正则匹配关键词，返回匹配结果和索引
  * @param str 
@@ -10,7 +10,7 @@ export type MatchResult = {
  * @param startIndex 
  * @returns 
  */
-export const match = (str: string, pattern: RegExp, startIndex?: number): MatchResult | null => {
+export const match = (str: string, pattern: RegExp, startIndex?: number): MatchResult => {
   if (!str) {
     return null;
   };
@@ -36,8 +36,8 @@ export const match = (str: string, pattern: RegExp, startIndex?: number): MatchR
 };
 
 /**
- * 转换正则语法保留关键字， 如$
- * todo:判断逻辑待优化
+ * 转换字符串中正则语法保留关键字， 如$
+ * todo:判断逻辑待优化,转换的词语是否是应该转换的词语
  * @param str 
  * @returns 
  */

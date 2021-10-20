@@ -1,8 +1,11 @@
 import * as vscode from 'vscode';
-import { ThemeHighLighter } from './ThemeHighlighter';
+import { ThemeHighlighter } from './ThemeHighlighter';
 
+/**
+ * 管理所有高亮情况
+ */
 class ThemeHighlightManager {
-  private _hightLightList: ThemeHighLighter[] = [];
+  private _hightLightList: ThemeHighlighter[] = [];
 
 
   public onOpenEditor(editors?: vscode.TextEditor[]) {
@@ -10,25 +13,25 @@ class ThemeHighlightManager {
       editors = vscode.window.visibleTextEditors;
     }
     const changedEditors = editors.filter(item => !this.previousEditors.includes(item));
-    const changeHighLightList = changedEditors.map(item => new ThemeHighLighter(item));
+    const changeHighLightList = changedEditors.map(item => new ThemeHighlighter(item));
     changeHighLightList.map(item => item.doHighlight());
 
     const closedHighlightList = this._hightLightList.filter(({ editor }) => !vscode.window.visibleTextEditors.includes(editor));
-    this.disposeHighLightList(closedHighlightList);
+    this.disposeHighlightList(closedHighlightList);
 
     this._hightLightList.push(...changeHighLightList);
 
   }
 
   get previousEditors(): vscode.TextEditor[] {
-    return this._hightLightList.map(({ editor }) => (editor));
+    return this._hightLightList.map(({ editor }) => editor);
   }
 
-  public dispose(){
-    this.disposeHighLightList(this._hightLightList);
+  public dispose() {
+    this.disposeHighlightList(this._hightLightList);
   }
 
-  private disposeHighLightList(list: ThemeHighLighter[] = []) {
+  private disposeHighlightList(list: ThemeHighlighter[] = []) {
     list.map(item => {
       item.dispose();
     });
