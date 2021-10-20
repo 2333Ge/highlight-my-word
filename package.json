@@ -1,6 +1,7 @@
 {
   "name": "highlight-my-word",
-  "displayName": "highlightMyWord",
+  "publisher": "yangchaohao",
+  "displayName": "highlight my word",
   "description": "highlight word",
   "version": "0.0.1",
   "engines": {
