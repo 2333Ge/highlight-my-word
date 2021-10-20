@@ -2,9 +2,6 @@ import * as vscode from "vscode";
 import { highlightColorManager } from './ThemeManager';
 import { match, MatchResult } from "./utils/string";
 
-
-type DecoratorMap = { [key: string]: vscode.TextEditorDecorationType };
-
 /**
  * 以编辑器维度管理颜色
  * todo:字符更新时取消对应字段的装饰器逻辑待优化
@@ -12,16 +9,16 @@ type DecoratorMap = { [key: string]: vscode.TextEditorDecorationType };
  */
 export class ThemeHighLighter {
   private _editor: vscode.TextEditor;
-  private _decoratorMap: DecoratorMap = {};
   private _documentChangeDispose?: vscode.Disposable;
   // 性能优化用
   private _previousText?: string;
-
+  private _colorRangeMap?: { [key: string]: vscode.Range[] } = {};
 
   constructor(editor: vscode.TextEditor) {
     this._editor = editor;
     this._documentChangeDispose = vscode.workspace.onDidChangeTextDocument(({ document }) => this.onUpdate(document));
   }
+
 
   public get editor() {
     return this._editor;
@@ -56,30 +53,20 @@ export class ThemeHighLighter {
       startMatchIndex = matchResult.index + matchResult.target.length;
       matchResult = match(text, highlightColorManager.keysPattern, startMatchIndex);
     }
-    this.disposeDecorator();
     for (let colorKey in newColorRangeMap) {
-      this._decoratorMap[colorKey] = this.createDecorator(colorKey);
-      this._editor.setDecorations(this._decoratorMap[colorKey], newColorRangeMap[colorKey]);
+      this._editor.setDecorations(highlightColorManager.colorDecoratorMap[colorKey], newColorRangeMap[colorKey]);
     }
+    for (let colorKey in this._colorRangeMap) {
+      if (!newColorRangeMap[colorKey]) {
+        this._editor.setDecorations(highlightColorManager.colorDecoratorMap[colorKey], []);
+      }
+    }
+    this._colorRangeMap = newColorRangeMap;
     this._previousText = text;
   }
 
-  public disposeDecorator() {
-    Object.values(this._decoratorMap).forEach(item => item.dispose());
-  }
-
-  public dispose(){
+  public dispose() {
     this._documentChangeDispose?.dispose();
-  }
-
-  private createDecorator(colorKey: string): vscode.TextEditorDecorationType {
-    const textColor = highlightColorManager.curTheme[colorKey][1] <= '9' ? '#fff' : '#333';
-    return vscode.window.createTextEditorDecorationType({
-      overviewRulerLane: vscode.OverviewRulerLane.Center,
-      borderRadius: '2px',
-      color: textColor,
-      backgroundColor: highlightColorManager.curTheme[colorKey],
-    });
   }
 
 }
