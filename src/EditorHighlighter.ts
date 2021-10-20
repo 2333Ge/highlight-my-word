@@ -1,11 +1,11 @@
 import * as vscode from "vscode";
-import { highlightColorManager } from './ThemeManager';
+import { highlightColorManager } from './HighlightColorManager';
 import { match, MatchResult } from "./utils/string";
 
 /**
  * 以编辑器维度管理高亮词语
  */
-export class ThemeHighlighter {
+export class EditorHighlighter {
   private _editor: vscode.TextEditor;
   private _documentChangeDispose?: vscode.Disposable;
   private _colorRangeMap?: { [key: string]: vscode.Range[] } = {};

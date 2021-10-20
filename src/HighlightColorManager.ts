@@ -20,7 +20,6 @@ class HighlightColorManager {
   public readonly curThemeKey?: string;
   public readonly themes: Themes;
   public readonly keysPattern: RegExp;
-
   public readonly themeKeys: string[];
   public readonly basicTheme: Theme;
   public readonly curTheme: Theme;
