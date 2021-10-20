@@ -16,7 +16,7 @@ type DecoratorMap = { [key: string]: vscode.TextEditorDecorationType };
 /**
  * 读取配置，管理高亮词语
  */
-class HighlightColorManager {
+export class HighlightColorManager {
   public readonly curThemeKey?: string;
   public readonly themes: Themes;
   public readonly keysPattern: RegExp;
@@ -48,8 +48,10 @@ class HighlightColorManager {
     return this._instance;
   }
 
-  public reloadConfig() {
+  public static reloadConfig() {
+    HighlightColorManager.instance.dispose();
     HighlightColorManager._instance = new HighlightColorManager();
+
   }
 
   public get isEmpty(): boolean {
@@ -87,5 +89,3 @@ class HighlightColorManager {
   }
 
 }
-
-export const highlightColorManager = HighlightColorManager.instance;

@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
-import { highlightColorManager } from './HighlightColorManager';
 import { match, MatchResult } from "./utils/string";
 
+import { HighlightColorManager } from './HighlightColorManager';
 /**
  * 以编辑器维度管理高亮词语
  */
@@ -34,6 +34,7 @@ export class EditorHighlighter {
   }
 
   public doHighlight() {
+    const { instance: highlightColorManager } = HighlightColorManager;
     if (highlightColorManager.isEmpty) {
       return;
     }
