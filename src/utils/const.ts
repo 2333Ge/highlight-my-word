@@ -1,1 +1,2 @@
-export const QUICK_PICK_BASIC_THEME = '基础主题';
+export const BASIC_THEME_DESC = '基础主题';
+export const EXTENSION_TITLE = 'Highlight My Word';
