@@ -4,7 +4,7 @@ import { HighlightColorManager } from './HighlightColorManager';
 import { BASIC_THEME_DESC, EXTENSION_TITLE } from './utils/const';
 
 /**
- * 管理所有高亮情况
+ * 管理所有高亮
  */
 class ThemeHighlightManager {
   private _hightLightList: EditorHighlighter[] = [];
@@ -48,7 +48,10 @@ class ThemeHighlightManager {
       canPickMany: false,
       placeHolder: "选择您的主题"
     }).then((res) => {
-      HighlightColorManager.changeTheme(res === BASIC_THEME_DESC ? undefined : res);
+      if (!res) {
+        return;
+      }
+      HighlightColorManager.changeTheme(res === BASIC_THEME_DESC ? '' : res);
       this.refresh();
     });
   };
