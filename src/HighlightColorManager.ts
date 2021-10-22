@@ -30,7 +30,7 @@ export class HighlightColorManager {
   private constructor() {
     this.themes = vscode.workspace.getConfiguration('highlight-my-word').get('themes', {});
     this.basicTheme = vscode.workspace.getConfiguration('highlight-my-word').get('basicTheme', {});
-    this.curThemeKey = vscode.workspace.getConfiguration('highlight-my-word').get('curThemeKey', undefined);
+    this.curThemeKey = vscode.workspace.getConfiguration('highlight-my-word').get('curThemeKey', '');
     this.curTheme = this.mergeBasicTheme(this.curThemeKey);
     // 按长短排序，避免重复着色
     this.themeKeys = Object.keys(this.curTheme).sort((str1, str2) => str2.length - str1.length);
@@ -54,12 +54,12 @@ export class HighlightColorManager {
 
   }
 
-  public static changeTheme(themeKey?: string) {
+  public static changeTheme(themeKey: string = '') {
     const { instance } = HighlightColorManager;
     if (themeKey === instance.curThemeKey) {
       return;
     }
-    if (!themeKey && (!instance.isUseBasicTheme)) {
+    if (!themeKey && (instance.isUseBasicTheme)) {
       return;
     }
     vscode.workspace.getConfiguration('highlight-my-word').update('curThemeKey', themeKey);
