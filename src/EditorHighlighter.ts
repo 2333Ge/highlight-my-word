@@ -15,23 +15,14 @@ export class EditorHighlighter {
 
   constructor(editor: vscode.TextEditor) {
     this._editor = editor;
-    this._documentChangeDispose = vscode.workspace.onDidChangeTextDocument(({ document }) => this.onUpdate(document));
+    this._documentChangeDispose = vscode.workspace.onDidChangeTextDocument(({ document }) => this._onUpdate(document));
   }
-
 
   public get editor() {
     return this._editor;
   }
 
-  private onUpdate(document: vscode.TextDocument) {
-    if (this._editor.document.uri.path !== document.uri.path) {
-      return;
-    }
-    if (document.getText() === this._previousText) {
-      return;
-    }
-    this.doHighlight();
-  }
+
 
   public doHighlight() {
     const { instance: highlightColorManager } = HighlightColorManager;
@@ -67,6 +58,16 @@ export class EditorHighlighter {
 
   public dispose() {
     this._documentChangeDispose?.dispose();
+  }
+
+  private _onUpdate(document: vscode.TextDocument) {
+    if (this._editor.document.uri.path !== document.uri.path) {
+      return;
+    }
+    if (document.getText() === this._previousText) {
+      return;
+    }
+    this.doHighlight();
   }
 
 }

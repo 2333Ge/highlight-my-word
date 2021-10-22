@@ -31,13 +31,13 @@ export class HighlightColorManager {
     this.themes = vscode.workspace.getConfiguration('highlight-my-word').get('themes', {});
     this.basicTheme = vscode.workspace.getConfiguration('highlight-my-word').get('basicTheme', {});
     this.curThemeKey = vscode.workspace.getConfiguration('highlight-my-word').get('curThemeKey', '');
-    this.curTheme = this.mergeBasicTheme(this.curThemeKey);
+    this.curTheme = this._mergeBasicTheme(this.curThemeKey);
     // 按长短排序，避免重复着色
     this.themeKeys = Object.keys(this.curTheme).sort((str1, str2) => str2.length - str1.length);
     const patternStr = `(${this.themeKeys.map((str) => { return transToSafeWord(str); }).join('|')})`;
     this.keysPattern = new RegExp(patternStr);
     this.themeKeys.forEach(key => {
-      this.colorDecoratorMap[key] = this.createDecorator(key);
+      this.colorDecoratorMap[key] = this._createDecorator(key);
     });
   }
 
@@ -85,7 +85,7 @@ export class HighlightColorManager {
     });
   }
 
-  private mergeBasicTheme(themeKey?: string): Theme {
+  private _mergeBasicTheme(themeKey?: string): Theme {
     if (!themeKey) {
       return { ...this.basicTheme };
     };
@@ -98,7 +98,7 @@ export class HighlightColorManager {
     };
   }
 
-  private createDecorator(colorKey: string): vscode.TextEditorDecorationType {
+  private _createDecorator(colorKey: string): vscode.TextEditorDecorationType {
     const textColor = this.curTheme[colorKey][1] <= '9' ? '#fff' : '#333';
     return vscode.window.createTextEditorDecorationType({
       overviewRulerColor: this.curTheme[colorKey],
