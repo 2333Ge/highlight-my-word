@@ -1,9 +1,9 @@
 {
   "name": "highlight-my-word",
   "publisher": "2333Ge",
-  "displayName": "highlight-my-word",
-  "description": "highlight-my-word",
-  "version": "0.0.1",
+  "displayName": "Highlight My Word",
+  "description": "Highlight My Word",
+  "version": "0.0.3",
   "repository": "https://github.com/2333Ge/highlight-my-word",
   "icon": "source/icon.png",
   "engines": {
