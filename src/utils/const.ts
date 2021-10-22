@@ -1,0 +1,1 @@
+export const QUICK_PICK_BASIC_THEME = '基础主题';

@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { EditorHighlighter } from './EditorHighlighter';
 import { HighlightColorManager } from './HighlightColorManager';
+import { QUICK_PICK_BASIC_THEME } from './utils/const';
 
 /**
  * 管理所有高亮情况
@@ -29,6 +30,19 @@ class ThemeHighlightManager {
     this.refresh();
   };
 
+  public onCommandChangeTheme = () => {
+    vscode.window.showQuickPick([
+      QUICK_PICK_BASIC_THEME,
+      ...HighlightColorManager.instance.themesKeys,
+    ], {
+      canPickMany: false,
+      placeHolder: "选择您的主题"
+    }).then((res) => {
+      HighlightColorManager.changeTheme(res === QUICK_PICK_BASIC_THEME ? undefined : res);
+      this.refresh();
+    });
+  };
+
   public refresh() {
     this._hightLightList.forEach(item => item.doHighlight());
   }
@@ -41,6 +55,7 @@ class ThemeHighlightManager {
   private get previousEditors(): vscode.TextEditor[] {
     return this._hightLightList.map(({ editor }) => editor);
   }
+
 
 
 

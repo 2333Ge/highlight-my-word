@@ -54,9 +54,30 @@ export class HighlightColorManager {
 
   }
 
+  public static changeTheme(themeKey?: string) {
+    const { instance } = HighlightColorManager;
+    if (themeKey === instance.curThemeKey) {
+      return;
+    }
+    if (!themeKey && (!instance.isUseBasicTheme)) {
+      return;
+    }
+    vscode.workspace.getConfiguration('highlight-my-word').update('curThemeKey', themeKey);
+    this.reloadConfig();
+  }
+
   public get isEmpty(): boolean {
     return this.themeKeys.length === 0;
   }
+
+  public get isUseBasicTheme(): boolean {
+    return !this.curThemeKey || this.themeKeys.includes(this.curThemeKey)
+  }
+
+  public get themesKeys(): string[] {
+    return Object.keys(this.themes);
+  }
+
 
   public dispose() {
     Object.keys(this.colorDecoratorMap).forEach(key => {
