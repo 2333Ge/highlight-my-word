@@ -4,6 +4,8 @@
   "displayName": "%extension-title%",
   "description": "%extension-title%",
   "version": "0.0.1",
+  "repository": "https://github.com/2333Ge/highlight-my-word",
+  "icon": "source/icon.png",
   "engines": {
     "vscode": "^1.61.0"
   },
