@@ -23,7 +23,7 @@ class ThemeHighlightManager implements vscode.HoverProvider {
     const { instance } = HighlightColorManager;
     const color = instance.getColor(word);
     if (color) {
-      return new vscode.Hover(`${color}`);
+      return new vscode.Hover(color);
     }
   }
 

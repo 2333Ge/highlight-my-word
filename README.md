@@ -6,6 +6,7 @@
 
 - 高亮自定义单词
 - 支持主题切换
+- 鼠标悬浮到主题变量时显示真实色值
 
 ## 配置
 
@@ -43,3 +44,7 @@ themes 与 basicTheme 同时配置时会进行合并，如下例所示，$primar
 - 点击底部状态栏：Highlight My Word
 - cmd + shift + P => 输入：切换主题(choose theme)
 - setting.json 中配置 curThemeKey
+
+# 相关链接
+
+[1][相关VSCode API使用总结](https://juejin.cn/post/7021931752914419743)
