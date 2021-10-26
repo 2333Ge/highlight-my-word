@@ -6,7 +6,7 @@ import { BASIC_THEME_DESC, EXTENSION_TITLE } from './utils/const';
 /**
  * 管理所有高亮
  */
-class ThemeHighlightManager {
+class ThemeHighlightManager implements vscode.HoverProvider {
   private _hightLightList: EditorHighlighter[] = [];
   private _statusBar!: vscode.StatusBarItem;
 
@@ -16,6 +16,15 @@ class ThemeHighlightManager {
     this._statusBar.command = 'command.chooseTheme';
     this._statusBar.tooltip = '点击切换主题';
     this._statusBar.show();
+  }
+
+  provideHover(document: vscode.TextDocument, position: vscode.Position, _: vscode.CancellationToken): vscode.ProviderResult<vscode.Hover> {
+    const word = document.getText(document.getWordRangeAtPosition(position));
+    const { instance } = HighlightColorManager;
+    const color = instance.getColor(word);
+    if (color) {
+      return new vscode.Hover(`${color}`);
+    }
   }
 
 

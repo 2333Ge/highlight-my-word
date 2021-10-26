@@ -78,6 +78,11 @@ export class HighlightColorManager {
     return Object.keys(this.themes);
   }
 
+  public getColor(key?: string) {
+    if (key) {
+      return this.curTheme[key];
+    }
+  }
 
   public dispose() {
     Object.keys(this.colorDecoratorMap).forEach(key => {
@@ -108,5 +113,7 @@ export class HighlightColorManager {
       backgroundColor: this.curTheme[colorKey],
     });
   }
+
+
 
 }

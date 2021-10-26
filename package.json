@@ -3,7 +3,7 @@
   "publisher": "2333Ge",
   "displayName": "Highlight My Word",
   "description": "Highlight My Word",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": "https://github.com/2333Ge/highlight-my-word",
   "icon": "source/icon.png",
   "engines": {

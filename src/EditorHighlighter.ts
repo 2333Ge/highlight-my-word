@@ -23,7 +23,6 @@ export class EditorHighlighter {
   }
 
 
-
   public doHighlight() {
     const { instance: highlightColorManager } = HighlightColorManager;
     if (highlightColorManager.isEmpty) {
