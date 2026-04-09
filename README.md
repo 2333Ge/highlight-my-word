@@ -45,6 +45,8 @@ themes 与 basicTheme 同时配置时会进行合并，如下例所示，$primar
 - cmd + shift + P => 输入：切换主题(choose theme)
 - setting.json 中配置 curThemeKey
 
+示例可见：https://juejin.cn/post/7021931752914419743
+
 # 相关链接
 
 [1][相关VSCode API使用总结](https://juejin.cn/post/7021931752914419743)
